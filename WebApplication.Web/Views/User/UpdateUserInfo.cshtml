@@ -1,0 +1,40 @@
+﻿@model SportsClubOrganizer.Web.Models.User
+@{
+    ViewData["Title"] = "UpdateUserInfo";
+}
+
+<div class="page-info">
+    <h2>Update Username/Password</h2>
+
+    <form asp-controller="User" asp-action="UpdateUserInfo" method="post">
+        <p>
+            <label asp-for="Username">Email</label>
+        </p>
+        <p>
+            <input type="email" asp-for="Username" value="@Model.Username" />
+            <span asp-validation-for="Username"></span>
+        </p>
+
+        <p>
+            <label asp-for="Password">Current Password</label>
+        </p>
+        <p>
+            <input type="password" asp-for="Password" placeholder="enter current password"/>
+            <span asp-validation-for="Password"></span>
+        </p>
+
+        <p>
+            <label asp-for="NewPassword">New Password</label>
+        </p>
+        <p>
+            <input type="password" asp-for="NewPassword" placeholder="enter new password"/>
+            <span asp-validation-for="Password"></span>
+        </p>
+
+        <input type="submit" value="Update Info" class="btn btn-default" />
+
+        <a asp-controller="User" asp-action="UserHomePage">
+            <input type="button" value="Back to My Account" class="btn btn-default" />
+        </a>
+    </form>
+</div>

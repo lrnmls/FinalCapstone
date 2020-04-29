@@ -1,0 +1,50 @@
+﻿@using SportsClubOrganizer.Web.Models
+@model List<SportsClubOrganizer.Web.Models.Team>
+
+@{
+    ViewData["Title"] = "ViewAllTeams";
+}
+
+<div class="page-info">
+    <h2>View All Teams</h2>
+
+    <table>
+        <tr>
+            <th>Team Name</th>
+            <th>League</th>
+            <th>Organization</th>
+            <th>Primary Venue</th>
+            <th>Secondary Venue</th>
+            <th>Home Dates Available</th>
+            <th>Travel Dates Available</th>
+        </tr>
+
+        @foreach (Team team in Model)
+        {
+            <tr>
+                <td><a asp-action="AdminSeeSchedule" asp-controller="Admin" asp-route-id="@team.TeamID" class="table-links">@team.Name</a></td>
+                <td>@team.League</td>
+                <td>@team.Org</td>
+                <td>@team.PrimaryVenue</td>
+                <td>@team.SecondaryVenue</td>
+                <td>
+                    @foreach (DateTime date in team.HomeDates)
+                    {
+                        @date.ToString("MM/dd/yyyy")
+                        <br/>
+                    }
+                </td>
+                <td>
+                    @foreach (DateTime date in team.TravelDates)
+                    {
+                        @date.ToString("MM/dd/yyyy")
+                        <br />
+                    }
+                </td>
+            </tr>
+        }
+    </table>
+    <a asp-controller="Admin" asp-action="AdminHomePage">
+        <input type="button" value="Back to My Account" class="btn btn-default" />
+    </a>
+</div>

@@ -1,0 +1,119 @@
+﻿@using SportsClubOrganizer.Web.Models.Messages
+@model List<SportsClubOrganizer.Web.Models.Messages.MessagesModel>
+@{
+    ViewData["Title"] = "SeeMessages";
+}
+<div class="page-info">
+    <h2>See Messages</h2>
+    @if (Model.Count > 0)
+    {
+        <h3>Pending Requests:</h3>
+        @foreach (MessagesModel message in Model)
+        {
+            @if (message.UserAccepted == "no")
+            {
+                <table>
+                    <tr>
+                        <th>From:</th>
+                        <td>@message.SentByName</td>
+                    </tr>
+                    <tr>
+                        <th>Message:</th>
+                        <td><p name="MessageBody">@message.MessageBody</p></td>
+                    </tr>
+                    <tr>
+                        <th>Status:</th>
+                        <td style="color: blue">Match Pending Approval- awaiting Admin to approve/decline.</td>
+                    </tr>
+                </table>
+
+                <form asp-controller="Message" asp-action="UserAcceptEvent" method="post">
+                    <input type="submit" name="Accept" value="Accept Proposed Event" class="btn btn-default" />
+                    <input type="hidden" asp-for="@message.ID" name="id" class="form-control" />
+                </form>
+
+                <form asp-controller="Message" asp-action="UserDeclineEvent" method="post">
+                    <input type="submit" name="Decline" value="Decline Proposed Event" class="btn btn-default" />
+                    <input type="hidden" asp-for="@message.ID" name="id" class="form-control" />
+                </form>
+            }
+        }
+
+        <h3>Accepted Requests:</h3>
+        @foreach (MessagesModel message in Model)
+        {
+            @if ((message.UserAccepted == "Accepted") && (message.AdminAccepted == "no"))
+            {
+                <table>
+                    <tr>
+                        <th>From:</th>
+                        <td>@message.SentByName</td>
+                    </tr>
+                    <tr>
+                        <th>Message</th>
+                        <td><p name="MessageBody">@message.MessageBody</p></td>
+                    </tr>
+                    <tr>
+                        <th>Status:</th>
+                        <td style="color: green">Match Accepted- please wait for Admin approval.</td>
+                    </tr>
+                </table>
+            }
+        }
+
+        <h3>Denied Requests:</h3>
+        @foreach (MessagesModel message in Model)
+        {
+            @if (message.UserAccepted == "Declined")
+            {
+                <table>
+                    <tr>
+                        <th>From:</th>
+                        <td>@message.SentByName</td>
+                    </tr>
+                    <tr>
+                        <th>Message</th>
+                        <td><p name="MessageBody">@message.MessageBody</p></td>
+                    </tr>
+                    <tr>
+                        <th>Status:</th>
+                        <td style="color: #ee2e29">Match Declined- @message.SentByName have been notified.</td>
+                    </tr>
+                </table>
+            }
+        }
+
+        @*<h3>Admin Approved Requests:</h3>
+        @foreach (MessagesModel message in Model)
+        {
+            @if ((message.UserAccepted == "Accepted") && (message.AdminAccepted == "Accepted"))
+            {
+                <table>
+                    <tr>
+                        <th>From:</th>
+                        <td>@message.SentByName</td>
+                    </tr>
+                    <tr>
+                        <th>Message</th>
+                        <td><p name="MessageBody">@message.MessageBody</p></td>
+                    </tr>
+                    <tr>
+                        <th>Status:</th>
+                        <td style="color: green">Match Accepted- this match has been added to your schedule.</td>
+                    </tr>
+                </table>
+            }
+        }*@
+    }
+    else
+    {
+        <p>You have no new messages!</p>
+    }
+
+    <a asp-controller="Message" asp-action="Index" method="post">
+        <input type="button" value="Back to Messages" class="btn btn-default" />
+    </a>
+    <a asp-controller="User" asp-action="UserHomePage" method="post">
+        <input type="button" value="Back to My Account" class="btn btn-default" />
+    </a>
+</div>

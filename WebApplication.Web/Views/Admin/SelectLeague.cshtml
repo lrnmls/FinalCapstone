@@ -1,0 +1,24 @@
+﻿@model SportsClubOrganizer.Web.Models.Team
+@{
+    ViewData["Title"] = "SelectLeague";
+}
+
+<div class="page-info">
+
+    <h2>Change Team Information</h2>
+
+    <form asp-controller="Admin" asp-action="SelectLeague" method="post">
+        <p>
+                <label asp-for="League" class="control-label">Select League To Be Changed</label>
+        </p>
+        <p>
+            <select asp-for="League" asp-items="Model.LeagueDropDown" class="dropbtn"></select>
+        </p>
+
+        <input type="submit" value="Select League" class="btn btn-default" />
+
+        <a asp-controller="Admin" asp-action="AdminHomePage">
+            <input type="button" value="Back to My Account" class="btn btn-default" />
+        </a>
+    </form>
+</div>

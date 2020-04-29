@@ -1,0 +1,62 @@
+﻿@using SportsClubOrganizer.Web.Models
+@using SportsClubOrganizer.Web.Models.Messages
+@model List<SportsClubOrganizer.Web.Models.Team>
+@{
+    ViewData["Title"] = "ViewMyLeague";
+}
+
+<div class="page-info">
+    <h2>Teams In My League</h2>
+    <table>
+        <tr>
+            <th>Team Name</th>
+            @*<th>League</th>
+            <th>Organization</th>*@
+            <th>Primary Venue</th>
+            <th>Secondary Venue</th>
+            <th><a asp-action="ViewMyLeague" asp-route-sortOrder="HomeAvailable" class="table-links">Home Dates Available</a></th>
+            <th><a asp-action="ViewMyLeague" asp-route-sortOrder="TravelAvailable" class="table-links">Travel Dates Available</a></th>
+            <th><a asp-action="ViewMyLeague" asp-route-sortOrder="TimesPlayed" class="table-links">Times Played</a></th>
+        </tr>
+
+        @foreach (Team team in Model)
+        {
+            <tr>
+                <td>@team.Name</td>
+                @*<td>@team.League</td>
+                <td>@team.Org</td>*@
+                <td>@team.PrimaryVenue</td>
+                <td>@team.SecondaryVenue</td>
+                <td>
+                    @foreach (DateTime date in team.HomeDates)
+                    {
+                        @date.ToString("MM/dd/yyyy")
+                        <br />
+
+                    }
+                </td>
+                <td>
+                    @foreach (DateTime date in team.TravelDates)
+                    {
+                        @date.ToString("MM/dd/yyyy")
+                        <br />
+                    }
+                </td>
+                <td>
+                    @if (team.count > 0)
+                    {
+                        <p>@team.count</p>
+                    }
+                    else
+                    {
+                        <p>0</p>
+                    }
+                </td>
+            </tr>
+        }
+    </table>
+
+    <a asp-controller="User" asp-action="UserHomePage">
+        <input type="button" value="Back to My Account" class="btn btn-default" />
+    </a>
+</div>

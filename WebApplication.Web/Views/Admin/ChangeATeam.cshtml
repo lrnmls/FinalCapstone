@@ -1,0 +1,74 @@
+﻿@model SportsClubOrganizer.Web.Models.Team
+@{
+    ViewData["Title"] = "ChangeATeam";
+}
+
+<div class="page-info">
+    <h2>Change Team Information</h2>
+    <form asp-controller="Admin" asp-action="ChangeATeam" method="post">
+        <input type="hidden" asp-for="TeamID" value="@Model.TeamID" />
+
+        <p>
+            <label asp-for="Name"></label>
+        </p>
+        <p>
+            <input type="text" asp-for="Name" value="@Model.Name" />
+            <span asp-validation-for="Name"></span>
+        </p>
+        <p>
+            <label asp-for="Org"></label>
+        </p>
+        <p>
+            <input type="text" asp-for="Org" value="@Model.Org" />
+            <span asp-validation-for="Org"></span>
+        </p>
+        <p>
+            <label asp-for="League"></label>
+        </p>
+        <p>
+            <input type="text" asp-for="League" value="@Model.League" />
+            <span asp-validation-for="League"></span>
+        </p>
+        <p>
+            <label asp-for="PrimaryVenue"></label>
+        </p>
+        <p>
+            <input type="text" asp-for="PrimaryVenue" value="@Model.PrimaryVenue" />
+            <span asp-validation-for="PrimaryVenue"></span>
+        </p>
+        <p>
+            <label asp-for="SecondaryVenue"></label>
+        </p>
+        <p>
+            <input type="text" asp-for="SecondaryVenue" value="@Model.SecondaryVenue" />
+            <span asp-validation-for="SecondaryVenue"></span>
+        </p>
+        <input type="hidden" asp-for="TeamID" value="@Model.TeamID" />
+
+        @foreach (DateTime date in @Model.HomeDates)
+        {
+            <p>
+                <label asp-for="@date">Home Dates</label>
+            </p>
+            <p>
+                <input type="text" asp-for="@date" value="@date.ToString("MM/dd/yyy")" />
+            </p>
+        }
+
+        @foreach (DateTime date in @Model.TravelDates)
+        {
+            <p>
+                <label asp-for="@date">Travel Dates</label>
+            </p>
+            <p>
+                <input type="text" asp-for="@date" value="@date.ToString("MM/dd/yyy")" />
+            </p>
+        }
+
+        <input type="submit" value="Change Team" class="btn btn-default" />
+
+        <a asp-controller="Admin" asp-action="AdminHomePage">
+            <input type="button" value="Back to My Account" class="btn btn-default" />
+        </a>
+    </form>
+</div>

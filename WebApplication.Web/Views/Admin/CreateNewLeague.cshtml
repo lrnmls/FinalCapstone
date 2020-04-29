@@ -1,0 +1,36 @@
+﻿@model SportsClubOrganizer.Web.Models.League
+@{
+    ViewData["Title"] = "CreateNewLeague";
+}
+
+<div class="page-info">
+    <h2>Create New League</h2>
+    <form asp-controller="Admin" asp-action="CreateNewLeague" method="post">
+        <p>
+            <label asp-for="LeagueName"></label>
+        </p>
+        <p>
+            <input type="text" asp-for="LeagueName" placeholder="enter league name"/>
+            <span asp-validation-for="LeagueName"></span>
+        </p>
+        <p>
+            <label asp-for="Org"></label>
+        </p>
+        <p>
+            <input type="text" asp-for="Org" placeholder="enter organization name"/>
+            <span asp-validation-for="Org"></span>
+        </p>
+        <p>
+            <label asp-for="Sport"></label>
+        </p>
+        <p>
+            <input type="text" asp-for="Sport" placeholder="enter sport"/>
+            <span asp-validation-for="Sport"></span>
+        </p>
+
+        <input type="submit" value="Create League" class="btn btn-default" />
+        <a asp-controller="Admin" asp-action="AdminHomePage">
+            <input type="button" value="Back to My Account" class="btn btn-default" />
+        </a>
+    </form>
+</div>

@@ -1,0 +1,46 @@
+﻿@using SportsClubOrganizer.Web.Models
+@model List<Player>
+@{
+    ViewData["Title"] = "ViewMyRoster";
+}
+
+<div class="page-info">
+    <h2>My Team Roster</h2>
+    <p>Click on a team member to edit their information</p>
+    <table class="team-table">
+        <tr>
+            <th>Name</th>
+            <th>Phone Number</th>
+            <th>Email Address</th>
+        </tr>
+        @foreach (Player player in Model)
+        {
+            <tr>
+                <td>
+                    <a asp-action="UpdateAPlayer" asp-controller="User" asp-route-id="@player.ID" class="table-links">
+                        @player.FirstName @player.LastName
+                    </a>
+                </td>
+                <td>@player.PhoneNumber</td>
+                @if (player.Email != null)
+                {
+                    <td>@player.Email</td>
+                }
+                else
+                {
+                    <td></td>
+                }
+
+            </tr>
+        }
+    </table>
+    <a asp-controller="User" asp-action="AddAPlayer">
+        <input type="button" value="Add A Player" class="btn btn-default" />
+    </a>
+    <a asp-controller="User" asp-action="DeletePlayer">
+        <input type="button" value="Remove A Player" class="btn btn-default" />
+    </a>
+    <a asp-controller="User" asp-action="UserHomePage">
+        <input type="button" value="Back to My Account" class="btn btn-default" />
+    </a>
+</div>

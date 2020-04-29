@@ -1,0 +1,37 @@
+﻿@model List<SportsClubOrganizer.Web.Models.Team>
+@{
+    ViewData["Title"] = "UserHomePage";
+}
+
+<div class="page-info">
+    <h2>Your Account</h2>
+    <p>@TempData["Added"]</p>
+    @{
+        if (DateTime.Now.Hour < 12 && DateTime.Now.Hour >= 0)
+        {
+            <h3>Good Morning!</h3>
+        }
+        else if (DateTime.Now.Hour >= 12 && DateTime.Now.Hour < 17)
+        {
+            <h3>Good Afternoon!</h3>
+        }
+        else if (DateTime.Now.Hour <= 24 && DateTime.Now.Hour >= 17)
+        {
+            <h3>Good Evening!</h3>
+        }
+    }
+
+    <div class="homepage-links">
+        <ul>
+            <li><a asp-action="ViewMyLeague" asp-controller="User">View Teams In League</a></li>
+            <li><a asp-action="SeeSchedule" asp-controller="User">See Schedule</a></li>
+            <li><a asp-action="ViewMyRoster" asp-controller="User">See Roster</a></li>
+            <li><a asp-action="Index" asp-controller="Message">Message Center</a></li>
+            <li><a asp-action="ChangeMyTeamInfo" asp-controller="User">Update Team Info</a></li>
+            <li><a asp-action="AddAvailableDates" asp-controller="User">Add Availability</a></li>
+            <li><a asp-action="UpdateUserInfo" asp-controller="User">Update Username/Password</a></li>
+            <li><a href="https://www.steamrollerrugby.com/columbus-womens-rugby/">View Team Store</a></li>
+
+        </ul>
+    </div>
+</div>

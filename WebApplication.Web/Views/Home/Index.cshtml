@@ -1,0 +1,25 @@
+﻿@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="page-info">
+    <p>@TempData["LogOut"]</p>
+    <p>@TempData["Registered"]</p>
+    @{
+        if (DateTime.Now.Hour < 12 && DateTime.Now.Hour >= 0)
+        {
+            <h2>Good Morning!</h2>
+        }
+        else if (DateTime.Now.Hour >= 12 && DateTime.Now.Hour < 17)
+        {
+            <h2>Good Afternoon!</h2>
+        }
+        else if (DateTime.Now.Hour <= 24 && DateTime.Now.Hour >= 17)
+        {
+            <h2>Good Evening!</h2>
+        }
+    }
+
+    <p>Sports are fun. Organizing each season is not. The Sports Club Organizer makes it easier!</p>
+    <p>Please register new user and login to access the organizer.</p>
+</div>

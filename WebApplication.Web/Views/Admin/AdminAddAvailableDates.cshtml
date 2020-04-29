@@ -1,0 +1,65 @@
+﻿@using System.Collections.Generic;
+@model SportsClubOrganizer.Web.Models.Calendar.Calendar
+@{
+    ViewData["Title"] = "AdminAddAvailableDates";
+}
+
+<div class="page-info">
+    <h2>Add Available Dates</h2>
+    <div class="flex">
+        <form asp-action="AdminAddAvailableDates" method="post">
+            <div>
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <p>
+                    <label asp-for="HomeDate" class="control-label"></label>
+                </p>
+                <p>
+                    <input asp-for="HomeDate" class="form-control" />
+                    <span asp-validation-for="HomeDate" class="text-danger"></span>
+                </p>
+                <p>
+                    <label asp-for="TravelDate" class="control-label"></label>
+                </p>
+                <p>
+                    <input asp-for="TravelDate" class="form-control" />
+                    <span asp-validation-for="TravelDate" class="text-danger"></span>
+                </p>
+
+                @*<input type="hidden" asp-for="TravelDates" class="form-control" />*@
+                <input type="hidden" asp-for="TeamID" value="@Model.TeamID" />
+            </div>
+            <div>
+                <input type="submit" value="Add Date(s)" class="btn btn-default" />
+                <a asp-controller="Admin" asp-action="AdminHomePage">
+                    <input type="button" value="No New Dates" class="btn btn-default" />
+                </a>
+                <a asp-controller="Admin" asp-action="AdminHomePage">
+                    <input type="button" value="Complete" class="btn btn-default" />
+                </a>
+            </div>
+        </form>
+
+
+        <div>
+            @if (Model.HomeDates.Count > 0)
+            {
+                <h3>Home Dates:</h3>
+                @foreach (DateTime date in Model.HomeDates)
+                {
+                    <p>@date.ToString("MM/dd/yyy")</p>
+                }
+            }
+        </div>
+
+        <div>
+            @if (Model.TravelDates.Count > 0)
+            {
+                <h3>Travel Dates:</h3>
+                @foreach (DateTime date in Model.TravelDates)
+                {
+                    <p>@date.ToString("MM/dd/yyy")</p>
+                }
+            }
+        </div>
+    </div>
+</div>
